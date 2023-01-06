@@ -11,7 +11,7 @@ pipeline{
                               name: 'Username')]
 
 				}
-					echo ${env.USERNAME}
+					echo "${env.USERNAME}"
 				}
 			}
 		}
