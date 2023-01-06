@@ -2,7 +2,7 @@ pipeline{
 	agent any
 	
 	stages{
-		stage("Test){
+		stage("Test"){
 			steps {	
 			script {
           				env.USERNAME = input message: 'Please enter the username',
