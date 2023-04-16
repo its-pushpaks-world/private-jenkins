@@ -10,7 +10,8 @@ pipeline {
     stage('Terraform init') {
       steps {
                sh '''
-               terraform init >> test.log
+               echo "Terraform Init"
+	       //terraform init >> test.log
                pwd >> test.log
                '''
            }   
@@ -18,15 +19,15 @@ pipeline {
     
     stage('Terraform plan') {
     steps {
-             sh 'terraform plan '
-             sh 'pwd'
+             //sh 'terraform plan '
+	    echo "Terraform Plan"
            }   
     }
         
     stage('Terraform apply') {
     steps {
-             sh 'terraform apply --auto-approve'
-             sh 'pwd'
+             //sh 'terraform apply --auto-approve'
+             echo "Terraform Apply"
 	     sh 'cat test.log'
            }   
     }   
