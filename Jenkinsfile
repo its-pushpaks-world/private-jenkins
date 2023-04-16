@@ -30,6 +30,12 @@ pipeline {
 	     sh 'cat test.log'
            }   
     }   
+    
+    stage('Run other pipeline') {
+    steps {
+              build job: 'Test_Parameter', parameters: [string(name: 'Option', value: 'Create')]
+            }
+        }
         
     }
     
