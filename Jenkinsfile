@@ -9,9 +9,9 @@ pipeline {
        
     stage('Terraform init') {
       steps {
-               sh '''
+              //terraform init >> test.log 
+	      sh '''
                echo "Terraform Init"
-	       //terraform init >> test.log
                pwd >> test.log
                '''
            }   
