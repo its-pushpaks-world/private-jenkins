@@ -34,7 +34,7 @@ pipeline {
     
     stage('Run other pipeline') {
     steps {
-              build job: 'Test_Parameter', parameters: [string(name: 'Option', value: 'Create')]
+              build job: 'Test_Parameter', parameters: [string(name: 'Option', value: 'Update')]
             }
         }
         
