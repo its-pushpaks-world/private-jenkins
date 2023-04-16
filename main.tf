@@ -1,25 +1,8 @@
-data "aws_ami" "aws_linux" {
-  most_recent = true
-  owners      = ["amazon"]
-
-  filter {
-    name   = "name"
-    values = ["amzn-ami-hvm-*-x86_64-gp2"]
-  }
-
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-
-}
-
-resource "aws_instance" "web" {
-  ami           = data.aws_ami.aws_linux.id
-  instance_type = "t2.micro"
+resource "aws_vpc" "main" {
+  cidr_block       = "10.0.0.0/16"
+  instance_tenancy = "default"
 
   tags = {
-    Name = "HelloWorld"
+    Name = "jenkins-terraform-aws-vpc"
   }
 }
