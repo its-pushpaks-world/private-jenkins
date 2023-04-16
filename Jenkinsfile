@@ -1,18 +1,50 @@
-pipeline{
-	agent any
+pipeline {
+   agent any
+   tools {
+        terraform 'terraform'
+        } 
 	
-	stages{
-		stage("Test"){
-			steps {	
-			script {
-          				env.USERNAME = input message: 'Please enter the username',
-                            	parameters: [string(defaultValue: '',
-                              description: '',
-                              name: 'Username')]
-
-				}
-					echo "${env.USERNAME}"
-				}
+	
+   stages {
+       
+    stage('Terraform init') {
+      steps {
+               sh '''
+               terraform init >> test.log
+               pwd >> test.log
+               '''
+           }   
+    }
+    
+    stage('Terraform plan') {
+    steps {
+             sh 'terraform plan --auto-approve'
+             sh 'pwd'
+           }   
+    }
+        
+    stage('Terraform apply') {
+    steps {
+             sh 'terraform apply --auto-approve'
+             sh 'pwd'
+	     sh 'cat test.log'
+           }   
+    }   
+        
+    }
+    
+post {
+	success { 
+	  script{
+		    
+		emailext to: "itspushpaksworld496@gmail.com",
+		subject: "Terraform Build successfully",
+      	        body: "Hello User,\n\nJob ${env.JOB_NAME} executed successfully. \nRefer this URL to know more: ${env.BUILD_URL}"
+       	        attachlog: true
+        	attachmentsPattern: "test.log"
+				
 			}
 		}
-}
+	}    
+    
+  }
