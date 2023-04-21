@@ -46,8 +46,7 @@ post {
 		    
 		emailext to: "itspushpaksworld496@gmail.com",
 		subject: "Terraform Build successfully",
-      	        body: "Hello User,\n\nJob ${env.JOB_NAME} executed successfully. \nRefer this URL to know more: ${env.BUILD_URL}"
-       	        attachlog: true
+      	        body: "Hello User,\n\nJob ${env.JOB_NAME} executed successfully. \nRefer this URL to know more: ${env.BUILD_URL}",
         	attachmentsPattern: "test.log"
 				
 			}
